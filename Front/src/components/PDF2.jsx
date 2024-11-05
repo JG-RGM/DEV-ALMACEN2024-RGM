@@ -56,7 +56,7 @@ let th = [];
 switch (Reporte) {
   case 'despacho':
       th = [['Código', 'Artículo', 'Cantidad Solicitada', 'Cantidad Aprobada']];
-      console.log('entra ca?');
+      //console.log('entra ca?');
       break;
   case 'despachoR':
     th = [['Código', 'Artículo', 'Cantidad Solicitada']];

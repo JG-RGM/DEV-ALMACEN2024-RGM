@@ -126,8 +126,9 @@ function despachoPage() {
 
         axios.post(`${config.apiUrl}/consultarDetalleRequisiciones`, requisicionSeleccionado)
           .then(response => {
+            
             //setresultadoDetalleRequisicion(response.data);
-
+            
             const arrayObjetosOriginales = response.data; // Usamos el resultado de la solicitud Axios
             let contador = 0;
             // Aplicar la lógica dentro de la función map
@@ -191,6 +192,7 @@ function despachoPage() {
 
         axios.post(`${config.apiUrl}/consultarDetalleDespacho`, requisicionSeleccionado)
           .then(response => {
+            console.log("genera")
             setresultadoDetalleDespacho(response.data);
           })
           .catch(error => {

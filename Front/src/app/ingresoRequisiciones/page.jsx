@@ -54,7 +54,7 @@ function IngresosPage() {
 
   //Agregando articulos a la tabla del modal
   const handleAgregar = () => {
-    if (articuloSeleccionado && cantidadIngresada && cantidadIngresada < cantidadArticulo) {
+    if (articuloSeleccionado && cantidadIngresada && cantidadIngresada <= cantidadArticulo) {
       // Verificar si el artículo ya está en la lista
       const articuloExistente = articulosIngresados.find(item => item.nombre === articuloSeleccionado);
   
@@ -90,6 +90,7 @@ function IngresosPage() {
       setCantidadArticulo('');
       //Verficamos que la cantidad a ingresar no sea mayor a la existente
     }else if (cantidadArticulo < cantidadIngresada ) {
+      console.log();
       Swal.fire({
         icon: 'info',
         title: 'No hay suficiente stock en el inventario.',
