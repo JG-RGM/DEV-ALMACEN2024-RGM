@@ -1,0 +1,23 @@
+{
+  "name": "rgm-backend",
+  "version": "1.0.0",
+  "description": "rgm backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon your-app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oscar Mazariegos",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cors-anywhere": "^0.4.4",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.0",
+    "nodemailer": "^6.9.11"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

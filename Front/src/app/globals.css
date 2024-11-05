@@ -1,0 +1,42 @@
+.fondo {
+    background: url('fondo2.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.custom-card {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+}
+
+.custom-card2 {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 10px;
+    max-width: 1000px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bg {
+    background-image: url('logo.png');
+    background-position: center center;
+    background-size: cover;
+}
+
+.imagen-perfil {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border: 10px solid #5271ff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aplica una sombra */
+}
+
+.card-title {
+    height: 40px; /* Altura fija para el contenedor del título (dos líneas aproximadamente) */
+    display: flex;
+    align-items: center;
+    padding: 5px; /* Ajusta el espaciado alrededor del texto según sea necesario */
+}

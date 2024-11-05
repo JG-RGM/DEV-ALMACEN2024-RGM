@@ -1,0 +1,10 @@
+.checkbox-label {
+    display: flex; /* Usa flexbox para alinear elementos */
+    align-items: center; /* Alinea verticalmente los elementos */
+    font-size: 1.2rem; /* Aumenta el tamaño del texto de las etiquetas */
+}
+
+.checkbox-label input[type="checkbox"] {
+    transform: scale(1.5); /* Aumenta el tamaño del checkbox */
+    margin-right: 10px; /* Agrega un espacio entre el checkbox y el texto */
+}
