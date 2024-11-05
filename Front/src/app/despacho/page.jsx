@@ -134,11 +134,14 @@ function despachoPage() {
             // Aplicar la lógica dentro de la función map
             const arrayObjetosNuevo = arrayObjetosOriginales.map((objeto, index, array) => {
               // Si la fecha de vencimiento no es nula
+              
               if (objeto.fechaVencimiento !== null) {
+                
                 // Calcular la cantidad faltante
                 const faltanteActual = objeto.cantidadArticuloVencimiento - objeto.cantidadAprobada;
                 // Si la cantidad faltante actual es positiva
                 if (faltanteActual < 0) {
+                  
                   objeto.restar =  objeto.cantidadArticuloVencimiento;
                   objeto.faltan = (faltanteActual*(-1));
                   objeto.cantidadAprobada = objeto.cantidadArticuloVencimiento;
@@ -153,10 +156,20 @@ function despachoPage() {
                     }
                   
                 } else {
+                  
                   objeto.restar = faltanteActual >= 0 ? objeto.cantidadAprobada : faltanteActual*(-1);
+                  // Buscar el siguiente objeto con un idArticulo diferente
+                  for (let i = index + 1; i < array.length; i++) {
+                    if (array[i].idArticulo == objeto.idArticulo) {
+                      contador = 1;
+                      break;
+                    }else{
+                      contador = 0;
+                      break;
+                    }
+                  }
                   if(contador == 0){
                     objeto.incluye = 1;
-                    contador = 1;
                   }
                   
 
