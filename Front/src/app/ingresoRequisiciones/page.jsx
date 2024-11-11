@@ -54,7 +54,8 @@ function IngresosPage() {
 
   //Agregando articulos a la tabla del modal
   const handleAgregar = () => {
-    if (articuloSeleccionado && cantidadIngresada && cantidadIngresada <= cantidadArticulo) {
+    console.log("ingresada: "+ cantidadIngresada+ "cantidad: "+cantidadArticulo)
+    if (articuloSeleccionado && cantidadIngresada && cantidadIngresada <= cantidadArticulo && cantidadIngresada!=0) {
       // Verificar si el artículo ya está en la lista
       const articuloExistente = articulosIngresados.find(item => item.nombre === articuloSeleccionado);
   
@@ -83,14 +84,14 @@ function IngresosPage() {
       }
   
       // Reiniciar los valores del artículo seleccionado y la cantidad ingresada
-      document.querySelector('input[name="FCantidad"]').value = null;
+      document.querySelector('input[name="FCantidad"]').value = 0;
       setArticuloSeleccionado('');
       setCantidadIngresada('');
       setSelectedOption(null);
       setCantidadArticulo('');
       //Verficamos que la cantidad a ingresar no sea mayor a la existente
     }else if (cantidadArticulo < cantidadIngresada ) {
-      console.log();
+      
       Swal.fire({
         icon: 'info',
         title: 'No hay suficiente stock en el inventario.',
