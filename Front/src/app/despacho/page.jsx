@@ -205,7 +205,6 @@ function despachoPage() {
 
         axios.post(`${config.apiUrl}/consultarDetalleDespacho`, requisicionSeleccionado)
           .then(response => {
-            console.log("genera")
             setresultadoDetalleDespacho(response.data);
           })
           .catch(error => {

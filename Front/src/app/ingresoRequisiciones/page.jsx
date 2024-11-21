@@ -54,7 +54,7 @@ function IngresosPage() {
 
   //Agregando articulos a la tabla del modal
   const handleAgregar = () => {
-    console.log("ingresada: "+ cantidadIngresada+ "cantidad: "+cantidadArticulo)
+    
     if (articuloSeleccionado && cantidadIngresada && cantidadIngresada <= cantidadArticulo && cantidadIngresada!=0) {
       // Verificar si el artículo ya está en la lista
       const articuloExistente = articulosIngresados.find(item => item.nombre === articuloSeleccionado);
@@ -205,7 +205,7 @@ function IngresosPage() {
       Cantidad: nuevaCantidad
     })
     .then(response => {
-      console.log(response.data);
+      
       Swal.fire({
         icon: 'success',
         title: 'Cantidad Actualizada',

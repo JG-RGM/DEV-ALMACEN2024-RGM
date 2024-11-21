@@ -105,6 +105,8 @@ return(
             </View>
             <View style={styles.dateContainer}>
                     <Text style={styles.dateText}>Usuario: {Autor}</Text>
+            </View>
+            <View style={styles.dateContainer}>
                     <Text style={styles.dateText}>Observaciones: {Informacion.observacion}</Text>
             </View>
             <View style={styles.dateContainer}>
