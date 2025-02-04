@@ -83,17 +83,90 @@ const renderEncabezado = () => {
 // Componente de tabla dinámica
 const renderRows = () => {
     let rows = [];
+    let cont=0;
+    let pagina = [];
+    
     for (let i = 0; i < Datos.length; i++) {
       const row = Datos[i];
+      cont+=1;
       rows.push(
         <View style={styles.tableRow} key={i} wrap={false}>
           {row.map((cell, cellIndex) => (
             <Text style={styles.tableCell} key={cellIndex}>{cell}</Text>
           ))}
+          
         </View>
       );
+      
+      if(Datos.length > 5 && cont == 6){
+        pagina.push(
+          <Page break />
+        )
+      }
     }
     return rows;
+};
+
+// Componente de tabla dinámica
+const renderAll = () => {
+  let todo = [];
+  let cont = 0;
+  let conteo= 0;
+  let conteo2= 0;
+  let flag = 0;
+  for (let i = 0; i < Datos.length; i++) {
+    conteo += Datos[i][1].length;
+  }
+
+  console.log("cambio")
+
+  for (let i = 0; i < Datos.length; i++) {
+    const row = Datos[i];
+    conteo2 += Datos[i][1].length;
+    cont += 1;
+    if(conteo > 250){
+      if (flag ==0 && conteo2 > 250 && conteo2 < 270) {
+        for (let x = 0; x < 13; x++) {
+          todo.push(
+            <View>
+              <Text> </Text>
+            </View>
+          );
+        }
+        flag = 1;
+      }else if(flag ==0 &&  conteo2 < 290 && conteo2 + Datos[i+1][1].length > 305){
+        for (let x = 0; x < 13; x++) {
+          todo.push(
+            <View>
+              <Text> </Text>
+            </View>
+          );
+        }
+        flag = 1;
+      }
+  }
+    if (cont == 1){
+      for (let j = 0; j < th.length; j++) {
+        const row = th[j];
+        todo.push(
+          <View style={styles.tableRow} key={i}>
+            {row.map((cell, cellIndex) => (
+              <Text style={styles.tableCell2} key={cellIndex}>{cell}</Text>
+            ))}
+          </View>
+        );
+      }
+    }
+    todo.push(
+      <View style={styles.tableRow} key={i} wrap={false}>
+        {row.map((cell, cellIndex) => (
+          <Text style={styles.tableCell} key={cellIndex}>{cell}</Text>
+        ))}
+        
+      </View>
+    );
+  }
+  return todo;
 };
 
 return(
@@ -129,9 +202,8 @@ return(
                     <Text style={styles.dateText}>Fecha Solicitud: {Informacion.fechaDespacho}</Text>
                     )}
             </View>
-            <View style={styles.table}>
-                {renderEncabezado()}
-                {renderRows()}
+            <View>
+              {renderAll()}
             </View>
             <View style={styles.signatureContainer}>
               {/* Apartado de firma a la izquierda */}
