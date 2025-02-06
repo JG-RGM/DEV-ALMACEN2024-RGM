@@ -114,18 +114,21 @@ const renderAll = () => {
   let conteo= 0;
   let conteo2= 0;
   let flag = 0;
+
+  //Total de caracteres
   for (let i = 0; i < Datos.length; i++) {
     conteo += Datos[i][1].length;
   }
 
-  console.log("cambio")
+  console.log("cambio2")
 
+ //lista de articulos y espacio
   for (let i = 0; i < Datos.length; i++) {
     const row = Datos[i];
     conteo2 += Datos[i][1].length;
     cont += 1;
-    if(conteo > 250){
-      if (flag ==0 && conteo2 > 250 && conteo2 < 270) {
+    if( conteo >250 && Datos[i+1] !== undefined){
+      if (flag == 0 && conteo2 > 250 && conteo2 < 270) {
         for (let x = 0; x < 13; x++) {
           todo.push(
             <View>
