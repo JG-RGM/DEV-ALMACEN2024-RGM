@@ -128,18 +128,37 @@ function despachoPage() {
           .then(response => {
             
             //setresultadoDetalleRequisicion(response.data);
+            console.log("------------------")
+            console.log(response.data)
             
             const arrayObjetosOriginales = response.data; // Usamos el resultado de la solicitud Axios
             let contador = 0;
+            let contador2 = 0;
+            let contador3 = 0;
             // Aplicar la lógica dentro de la función map
             const arrayObjetosNuevo = arrayObjetosOriginales.map((objeto, index, array) => {
               // Si la fecha de vencimiento no es nula
-              
+              let faltanteActual = 0;
               if (objeto.fechaVencimiento !== null) {
                 
-                // Calcular la cantidad faltante
-                const faltanteActual = objeto.cantidadArticuloVencimiento - objeto.cantidadAprobada;
-                // Si la cantidad faltante actual es positiva
+                if (objeto.cantidadAprobada > 0){
+                  // Calcular la cantidad faltante
+                  
+                  if(contador2 == 0){
+                    faltanteActual = objeto.cantidadArticuloVencimiento - objeto.cantidadTotalIngresada;
+                    contador2 = 1;
+                  }else{
+                    faltanteActual = objeto.cantidadArticuloVencimiento - objeto.cantidadAprobada;
+                  }
+
+                  if(objeto.cantidadArticuloVencimiento < 1){
+                    faltanteActual = 0;
+                  }
+                  
+
+                 // console.log("Faltante: "+faltanteActual+"aprobado: "+objeto.cantidadAprobada)
+                }
+                  // Si la cantidad faltante actual es positiva
                 if (faltanteActual < 0) {
                   
                   objeto.restar =  objeto.cantidadArticuloVencimiento;
@@ -149,33 +168,46 @@ function despachoPage() {
                     // Buscar el siguiente objeto con un idArticulo diferente
                     for (let i = index + 1; i < array.length; i++) {
                       if (array[i].idArticulo == objeto.idArticulo) {
-                        array[i].cantidadAprobada = (faltanteActual*(-1));
+                        array[i].cantidadAprobada = (faltanteActual*-1);
                         objeto.incluye = 1;
                         break;
                       }
                     }
-                  
+                
                 } else {
                   
-                  objeto.restar = faltanteActual >= 0 ? objeto.cantidadAprobada : faltanteActual*(-1);
+                  
+                  if(contador == 0 && objeto.cantidadArticuloVencimiento > 0){
+                    console.log("pasa")
+                    objeto.incluye = 1;
+                    objeto.restar = faltanteActual >= 0 ? objeto.cantidadAprobada : faltanteActual*(-1);
+                  }
                   // Buscar el siguiente objeto con un idArticulo diferente
                   for (let i = index + 1; i < array.length; i++) {
                     if (array[i].idArticulo == objeto.idArticulo) {
-                      contador = 1;
-                      break;
+                      if (objeto.cantidadArticuloVencimiento < 1){
+                        array[i].cantidadAprobada = objeto.cantidadAprobada;
+                        break;
+                      }else{
+                        console.log("pasa2")
+                        contador = 1;
+                        array[i].cantidadAprobada = 0;
+                        break;
+                      }
                     }else{
+                      contador2 = 0;
                       contador = 0;
+                      contador3 = 0;
                       break;
                     }
                   }
-                  if(contador == 0){
-                    objeto.incluye = 1;
-                  }
-                  
 
                 }
+                
               }else{
+                
                 objeto.incluye = 1;
+                
               }
               return objeto;
             });
@@ -183,9 +215,9 @@ function despachoPage() {
             // Filtrar objetos según los criterios especificados
             const nuevoArrayFiltrado = arrayObjetosNuevo.filter(objeto => {
               // Filtrar si la cantidadAprobada es menor que cantidadArticuloVencimiento, si la fecha de vencimiento es nula, si la resta es 0 y si listar es igual a 1
-              return objeto.incluye === 1;
+              return objeto.incluye == 1;
             });
-
+            console.log(nuevoArrayFiltrado)
             setresultadoDetalleRequisicion(nuevoArrayFiltrado);
           })
           .catch(error => {
