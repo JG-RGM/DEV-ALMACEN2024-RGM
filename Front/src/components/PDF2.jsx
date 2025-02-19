@@ -120,7 +120,7 @@ const renderAll = () => {
     conteo += Datos[i][1].length;
   }
 
-  console.log("cambio2")
+  console.log("conteo: " + conteo);
 
  //lista de articulos y espacio
   for (let i = 0; i < Datos.length; i++) {
@@ -128,7 +128,7 @@ const renderAll = () => {
     conteo2 += Datos[i][1].length;
     cont += 1;
     if( conteo >250 && Datos[i+1] !== undefined){
-      if (flag == 0 && conteo2 > 250 && conteo2 < 270) {
+      if (flag == 0 && conteo2 > 250 && conteo2 < 290) {
         for (let x = 0; x < 13; x++) {
           todo.push(
             <View>
@@ -137,7 +137,7 @@ const renderAll = () => {
           );
         }
         flag = 1;
-      }else if(flag ==0 &&  conteo2 < 290 && conteo2 + Datos[i+1][1].length > 305){
+      }else if(flag == 0 &&  conteo2 < 290 && conteo2 + Datos[i+1][1].length > 310){
         for (let x = 0; x < 13; x++) {
           todo.push(
             <View>
@@ -147,7 +147,16 @@ const renderAll = () => {
         }
         flag = 1;
       }
-  }
+    }else if (flag !== 2 && conteo > 500 &&  conteo2 >420){
+      for (let x = 0; x < 13; x++) {
+        todo.push(
+          <View>
+            <Text> </Text>
+          </View>
+        );
+      }
+      flag = 2;
+    }
     if (cont == 1){
       for (let j = 0; j < th.length; j++) {
         const row = th[j];
