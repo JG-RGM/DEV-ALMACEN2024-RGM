@@ -114,20 +114,38 @@ const renderAll = () => {
   let conteo= 0;
   let conteo2= 0;
   let flag = 0;
+  //variable creada para celdas con mucha info
+  let provisional=0;
 
   //Total de caracteres
   for (let i = 0; i < Datos.length; i++) {
     conteo += Datos[i][1].length;
+    
+    //conteo de celdas con mucho texto, actualmente esta personalizada para 4
+    if(Datos[i][1].length > 70){
+      provisional+=1;
+    }
   }
-
-  console.log("conteo: " + conteo);
+  //Colocar encabezado si no tiene datos
+  if(Datos.length == undefined){
+    for (let i = 0; i < th.length; i++) {
+      const row = th[i];
+      todo.push(
+        <View style={styles.tableRow} key={i}>
+          {row.map((cell, cellIndex) => (
+            <Text style={styles.tableCell2} key={cellIndex}>{cell}</Text>
+          ))}
+        </View>
+      );
+    }
+  }
 
  //lista de articulos y espacio
   for (let i = 0; i < Datos.length; i++) {
     const row = Datos[i];
     conteo2 += Datos[i][1].length;
     cont += 1;
-    if( conteo >250 && Datos[i+1] !== undefined){
+    if( conteo >250 && Datos[i+1] !== undefined && provisional != 4){
       if (flag == 0 && conteo2 > 250 && conteo2 < 290) {
         for (let x = 0; x < 13; x++) {
           todo.push(
@@ -137,7 +155,7 @@ const renderAll = () => {
           );
         }
         flag = 1;
-      }else if(flag == 0 &&  conteo2 < 290 && conteo2 + Datos[i+1][1].length > 310){
+      }else if(flag == 0 &&  conteo2 < 290 && conteo2 + Datos[i+1][1].length > 310 && provisional != 4){
         for (let x = 0; x < 13; x++) {
           todo.push(
             <View>
@@ -147,7 +165,7 @@ const renderAll = () => {
         }
         flag = 1;
       }
-    }else if (flag !== 2 && conteo > 500 &&  conteo2 >420){
+    }else if (flag !== 2 && conteo > 500 &&  conteo2 >420 && provisional != 4){
       for (let x = 0; x < 13; x++) {
         todo.push(
           <View>
@@ -178,6 +196,7 @@ const renderAll = () => {
       </View>
     );
   }
+  
   return todo;
 };
 

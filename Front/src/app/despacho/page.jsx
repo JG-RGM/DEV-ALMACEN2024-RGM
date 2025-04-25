@@ -453,11 +453,41 @@ function despachoPage() {
         });
 
       }else{
+
+        //Para rechazos que no tienen datos
+
+        let informacion = {
+          observacion: post.observaciones,
+          fechaDespacho: post.fechaSolicitud,
+          solicitante: post.solicitante,
+          autorizador: '',
+          codigo: post.codigo
+        }
+
+        console.log(informacion);
+        setInformacionReporte(informacion);
+        var nombre = post.codigo;
+
+        //Convertir el arreglo de objetos en un arreglo de arreglos de forma dinámica
+        const arregloDatos = {}
+
+        setdataReporte(arregloDatos);
+
+        const MyDocument = (
+          <PDF2 Reporte={'despachoR'} Datos={arregloDatos} Informacion={informacion} Autor={usuario.nombre+' '+usuario.apellido} />
+        );
+    
+        pdf(MyDocument).toBlob().then(blob => {
+            FileSaver.saveAs(blob, `RGM_Despacho_Rechazado_${nombre}.pdf`);
+        });
+
+        /*
         Swal.fire({
           icon: 'info',
-          text: 'No existen datos para reportar.',
+          text: 'No existen datos en este reporte.',
           showConfirmButton: true,
         })
+        */
       }
   
     })
